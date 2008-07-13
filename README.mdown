@@ -1,0 +1,14 @@
+dotfiles
+========
+
+A bunch of dotfiles that I've built up over time.  Feel free
+to comment, contribute, or point me to something that might
+interest me!
+
+
+contact
+=======
+
+Name: Joseph Pecoraro
+Blog: http://blog.bogojoker.com
+Email: joepeck02@gmail.com

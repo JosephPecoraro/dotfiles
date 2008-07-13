@@ -1,0 +1,21 @@
+# -----
+# Cheats - cache and complete
+# Source: http://github.com/elliottcable/dotfiles/tree/master/home/.profile
+# -----
+if [ ! -r ~/.cheats ]; then
+	echo "Rebuilding Cheat cache... "
+	cheat sheets | egrep '^ ' | awk {'print $1'} > ~/.cheats
+fi
+complete -W "$(cat ~/.cheats)" cheat
+
+# -----
+# Rake
+# Source: http://rhnh.net/2008/06/08/rake-tab-completion-with-caching-and-namespace-support
+# -----
+complete -C ~/.complete/rake_autocomplete.rb -o default rake
+
+# -----
+# Git
+# Source: 
+# -----
+source ~/.complete/git_completion.sh
