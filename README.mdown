@@ -1,14 +1,21 @@
-dotfiles
-========
+### dotfiles
 
 A bunch of dotfiles that I've built up over time.  Feel free
 to comment, contribute, or point me to something that might
 interest me!
 
+### copy\_over\_files.sh
 
-contact
-=======
+This is just a helper script to copy the dotfiles I've recently
+edited to the git repo directory.  I figured I'd include it here
+instead of ignoring it.  This is not actually required for
+any of the dotfiles.  Some people might find this concept useful.
 
-Name: Joseph Pecoraro
-Blog: http://blog.bogojoker.com
-Email: joepeck02@gmail.com
+### Contact Info
+
+Name: Joseph Pecoraro  
+Blog: [http://blog.bogojoker.com][1]  
+Email: [joepeck02@gmail.com][2]
+
+[1]: http://blog.bogojoker.com "Joseph Pecoraro's Blog"
+[2]: mailto:joepeck02@gmail.com "Joseph Pecoraro's Email"
