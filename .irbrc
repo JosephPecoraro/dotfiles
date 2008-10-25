@@ -86,6 +86,19 @@ class Hash
   end
 end
 
+# A real array def, not a set diff
+# a1 = [1,1,2]
+# a2 = [1,2]
+# a1 - a2     #=> []
+# a1.diff(a2) #=> [1]
+class Array
+	def diff(other)
+		list = self.dup
+		other.each { |elem| list.delete_at( list.index(elem) ) }
+		list
+	end
+end
+
 # Where quasi global methods belong (Thanks to aperios for teaching me!)
 module Kernel
   

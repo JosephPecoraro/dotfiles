@@ -9,25 +9,39 @@ alias du='du -hc'
 alias cd..='cd ..'
 alias cl='clear;ls'
 alias more='less'
+alias ....='cd ../../'
 alias mkdir='mkdir -p'
-alias today='date +"%A, %B %d, %Y"'
-alias yest='date -v-1d +"%A %B %d, %Y"'
 alias base64='base64 --quiet'
 alias recent='ls -lAt | head'
-alias ebashrc='mate ~/.bashrc'
 alias mbashrc='mate ~/.bashrc'
 alias sbashrc='source ~/.bashrc'
+alias gsed='/usr/local/bin/sed'
+alias today='date +"%A, %B %d, %Y"'
+alias yest='date -v-1d +"%A %B %d, %Y"'
 alias htdocs='cd /Applications/MAMP/htdocs/'
+alias ttrunk='cd ~/Desktop/macwidgets/todo/trunk/'
+alias ptrunk='cd ~/Desktop/macwidgets/profiles/trunk/'
 alias mampmysql='/Applications/MAMP/Library/bin/mysql -u joe -p'
 alias desktoptopia='open /Users/joe/Library/Application\ Support/Desktoptopia/.Backgrounds/'
+alias jsdb='~/bin/jsdb_mac_1.7.2/jsdb' # JSDB Shell
 alias ql='qlmanage -p "$@" >& /dev/null' # Quick Look alias
 alias jsr='java org.mozilla.javascript.tools.shell.Main' # Rhino Javascript Shell
+
+# -------------
+#   School
+# -------------
+alias xml='cd /Users/joe/Desktop/School/_XML'
+alias crypto='cd /Users/joe/Desktop/School/_Crypto'
+alias alg='cd /Users/joe/Desktop/School/_Algorithms'
+alias db='cd /Users/joe/Desktop/School/_Database/svnrepo'
+alias mbin='cd ~/mysql-bin/bin'
 
 # -------------
 #   Shortcuts
 # -------------
 alias c="clear"
 alias m="mate"
+alias l='ls -lh'
 alias h="history"
 
 # ----------------
@@ -40,7 +54,10 @@ source ~/.bash_complete
 # --------
 # See: ~/.ssh/config
 # Old: ssh host.whatever.edu -l username
+alias sshdb="echo 'V9TdxeE4w4'; ssh holly.cs.rit.edu -l p486-01b"
 alias rit="ssh rit"
+alias bluehost="ssh bluehost"
+alias gibson="ssh gibson"
 
 # -------
 #   Git
@@ -63,13 +80,17 @@ alias irb='irb -r irb/completion -rubygems'
 # ---------------
 #   Environment
 # ---------------
-export PATH="$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin"
+# export PATH="/usr/local/pgsql/bin:$PATH" # PostgreSQL
+# export MANPATH="$MANPATH:/usr/local/pgsql/man" # PostgreSQL
+export PATH="/opt/subversion/bin:$PATH" # Subversion 1.5.1
+export PATH="$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin" # My Built Mysql
 export PATH="$HOME/bin/:$PATH"
 export CLASSPATH="$CLASSPATH:/Users/joe/.classpath:/Users/joe/.classpath/js.jar"
 export HISTSIZE=10000
 export HISTFILESIZE=10000
 export PAGER=less
 export CLICOLOR=1
+export EDITOR=vim
 shopt -s histappend
 
 # ---------
@@ -86,6 +107,14 @@ export PS1="\u[\w]\$(parse_git_branch)$ "
 
 # Cool History Summerizer
 historyawk(){ history|awk '{a[$2]++}END{for(i in a){printf"%5d\t%s\n",a[i],i}}'|sort -nr|head; }
+
+# Strip Extra Whitespace from all files in a directory and subdirectories
+# UNSAFE FOR IMAGES... MAKE A SHELL SCRIPT
+#stripws() {
+#	dirsize .
+#	find . -exec rr --line --modify '\s+$' '' {} \;;
+#	dirsize .
+#}
 
 # cd directly to a dir and list contents
 cdl() {
