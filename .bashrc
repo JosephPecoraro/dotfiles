@@ -54,7 +54,6 @@ source ~/.bash_complete
 # --------
 # See: ~/.ssh/config
 # Old: ssh host.whatever.edu -l username
-alias sshdb="echo 'V9TdxeE4w4'; ssh holly.cs.rit.edu -l p486-01b"
 alias rit="ssh rit"
 alias bluehost="ssh bluehost"
 alias gibson="ssh gibson"
