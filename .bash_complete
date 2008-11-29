@@ -19,3 +19,9 @@ complete -C ~/.complete/rake_autocomplete.rb -o default rake
 # Source: 
 # -----
 source ~/.complete/git_completion.sh
+
+# -----
+# tabtab
+# Source: http://github.com/drnic/tabtab/tree/master
+# -----
+source ~/.tabtab.bash
