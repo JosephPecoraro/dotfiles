@@ -8,6 +8,7 @@ alias ps='ps -ax'
 alias du='du -hc'
 alias cd..='cd ..'
 alias cl='clear;ls'
+alias ex='expanurl'
 alias more='less'
 alias ....='cd ../../'
 alias mkdir='mkdir -p'
@@ -29,7 +30,9 @@ alias jsr='java org.mozilla.javascript.tools.shell.Main' # Rhino Javascript Shel
 # -------------
 #   School
 # -------------
-# Nothing yet
+alias compiler="cd /Users/joe/Desktop/School/_Compiler"
+alias para="cd /Users/joe/Desktop/School/_Parallel"
+alias complex="cd /Users/joe/Desktop/School/_Complexity"
 
 # -------------
 #   Shortcuts
@@ -38,6 +41,17 @@ alias c="clear"
 alias m="mate"
 alias l='ls -lh'
 alias h="history"
+alias e="echo"
+alias i="irb"
+
+# Shortcut for `open`
+o() {
+  if [ "$1" ]
+	then `open "$1"`
+	else `open .`
+	fi
+}
+
 
 # ----------------
 #   Autocomplete
@@ -72,6 +86,7 @@ rmsvn(){ find . -name ".svn" -type d -exec rm -rf {} \;; } # Note: "&> /dev/null
 #   Ruby
 # --------
 alias irb='irb -r irb/completion -rubygems'
+alias irb19='irb19 -r irb/completion -rubygems'
 
 # ---------------
 #   Environment
@@ -80,6 +95,7 @@ export PATH="/opt/subversion/bin:$PATH" # Subversion 1.5.1
 export PATH="$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin"
 export PATH="$HOME/bin/:$PATH"
 export CLASSPATH="$CLASSPATH:/Users/joe/.classpath:/Users/joe/.classpath/js.jar"
+export CLASSPATH="$CLASSPATH:/Users/joe/workspace/Rubyish/bin" # School
 export HISTSIZE=10000
 export HISTFILESIZE=10000
 export PAGER=less
