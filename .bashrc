@@ -17,6 +17,7 @@ alias recent='ls -lAt | head'
 alias mbashrc='mate ~/.bashrc'
 alias sbashrc='source ~/.bashrc'
 alias gsed='/usr/local/bin/sed'
+alias gemedit='gemedit --editor=mate'
 alias today='date +"%A, %B %d, %Y"'
 alias yest='date -v-1d +"%A %B %d, %Y"'
 alias htdocs='cd /Applications/MAMP/htdocs/'
@@ -35,14 +36,22 @@ alias para="cd /Users/joe/Desktop/School/_Parallel"
 alias complex="cd /Users/joe/Desktop/School/_Complexity"
 
 # -------------
+#   BogoJoker
+# -------------
+BOGO="/Volumes/BogoJoker/public_html"
+bogo="$BOGO"
+alias bogo="cd $BOGO"
+
+# -------------
 #   Shortcuts
 # -------------
-alias c="clear"
+alias i="irb"
 alias m="mate"
+alias e="echo"
+alias c="clear"
 alias l='ls -lh'
 alias h="history"
-alias e="echo"
-alias i="irb"
+alias x="expanurl"
 
 # Shortcut for `open`
 o() {
@@ -51,7 +60,6 @@ o() {
 	else `open .`
 	fi
 }
-
 
 # ----------------
 #   Autocomplete
