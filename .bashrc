@@ -10,6 +10,7 @@ alias cd..='cd ..'
 alias cl='clear;ls'
 alias ex='expanurl'
 alias more='less'
+alias ldir='ls -d */'
 alias ....='cd ../../'
 alias mkdir='mkdir -p'
 alias base64='base64 --quiet'
@@ -45,6 +46,7 @@ alias bogo="cd $BOGO"
 # -------------
 #   Shortcuts
 # -------------
+alias ?='man'
 alias i="irb"
 alias m="mate"
 alias e="echo"
@@ -153,6 +155,10 @@ nth() {
     do script with command \"cd '$(pwd)'; clear\" in selected tab of the front window
   end tell"
 }
+
+# Convert a Man Page to a PDF, really slick
+# SOURCE => http://dotfiles.org/~miragj/.bashrc
+pman() { man -t "$1" | open -f -a /Applications/Preview.app/; }
 
 # Run .profile (MacPorts)
 source ~/.profile
