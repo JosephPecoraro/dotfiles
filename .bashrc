@@ -118,8 +118,12 @@ shopt -s histappend
 #   Prompt
 # ---------
 
-# The terminal display - "user[path](gitbranch)$ " where gitbranch only shows up in a git repo
-parse_git_branch(){ git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'; }
+# The terminal display - "user[path](gitbranch)$ "
+#   - gitbranch only shows up in a git repo
+#   - gitbranch will have a * if there is a pending change
+#   - gitbranch Source => http://gist.github.com/31631
+parse_git_dirty(){ [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"; }
+parse_git_branch(){ git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"; }
 export PS1="\u[\w]\$(parse_git_branch)$ "
 
 # ---------
