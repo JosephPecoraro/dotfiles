@@ -51,7 +51,7 @@ alias i="irb"
 alias m="mate"
 alias e="echo"
 alias c="clear"
-alias l='ls -lh'
+alias l='ls -lhp'
 alias h="history"
 alias x="expanurl"
 
