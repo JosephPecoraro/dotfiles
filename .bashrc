@@ -32,6 +32,7 @@ alias jsr='java org.mozilla.javascript.tools.shell.Main' # Rhino Javascript Shel
 # -------------
 #   School
 # -------------
+alias rubyish="java Rubyish.RubyishREPL"
 alias compiler="cd /Users/joe/Desktop/School/_Compiler"
 alias para="cd /Users/joe/Desktop/School/_Parallel"
 alias complex="cd /Users/joe/Desktop/School/_Complexity"
@@ -39,9 +40,11 @@ alias complex="cd /Users/joe/Desktop/School/_Complexity"
 # -------------
 #   BogoJoker
 # -------------
-BOGO="/Volumes/BogoJoker/public_html"
-bogo="$BOGO"
-alias bogo="cd $BOGO"
+rit="/Volumes/RIT/"
+bogo="/Volumes/BogoJoker/public_html"
+htdocs="/Applications/MAMP/htdocs"
+school="/Users/joe/Desktop/School/"
+alias bogo="cd $bogo"
 
 # -------------
 #   Shortcuts
@@ -54,14 +57,22 @@ alias c="clear"
 alias l='ls -lhp'
 alias h="history"
 alias x="expanurl"
+alias s="easy_share"
+alias o="better_open"
+alias w="echo 'http://bogojoker.is-a-geek.com:8000/'; python -m SimpleHTTPServer"
 
-# Shortcut for `open`
-o() {
+# -------------
+#   Functions
+# -------------
+
+# Shortcut for `open` but no arguments opens the current directory
+better_open() {
   if [ "$1" ]
 	then `open "$1"`
 	else `open .`
 	fi
 }
+
 
 # ----------------
 #   Autocomplete
@@ -101,8 +112,8 @@ alias irb19='irb19 -r irb/completion -rubygems'
 # ---------------
 #   Environment
 # ---------------
-export PATH="/opt/subversion/bin:$PATH" # Subversion 1.5.1
-export PATH="$PATH:/usr/local/bin:/usr/local/sbin:/usr/local/mysql/bin"
+export PATH="/opt/subversion/bin:/usr/local/bin:$PATH" # Subversion 1.5.1
+export PATH="$PATH:/usr/local/sbin:/usr/local/mysql/bin"
 export PATH="$HOME/bin/:$PATH"
 export CLASSPATH="$CLASSPATH:/Users/joe/.classpath:/Users/joe/.classpath/js.jar"
 export CLASSPATH="$CLASSPATH:/Users/joe/workspace/Rubyish/bin" # School
@@ -113,6 +124,7 @@ export CLICOLOR=1
 export EDITOR=vim
 export LC_CTYPE=en_US.UTF-8
 shopt -s histappend
+
 
 # ---------
 #   Prompt
@@ -168,4 +180,7 @@ pman() { man -t "$1" | open -f -a /Applications/Preview.app/; }
 source ~/.profile
 
 # PDF Merge Command, to be created later
-# /usr/local/bin/gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=talking_points.pdf dbsi-notes-1.pdf dbsi-notes-2.pdf dbsi-notes-3.pdf dbsi-notes-4.pdf 
+# /usr/local/bin/gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=talking_points.pdf dbsi-notes-1.pdf dbsi-notes-2.pdf dbsi-notes-3.pdf dbsi-notes-4.pdf
+
+# Reminder how to do neat diffs
+# diff <(echo a) <(echo b)
