@@ -37,9 +37,11 @@ alias compiler="cd /Users/joe/Desktop/School/_Compiler"
 alias para="cd /Users/joe/Desktop/School/_Parallel"
 alias complex="cd /Users/joe/Desktop/School/_Complexity"
 
-# -------------
-#   BogoJoker
-# -------------
+# --------------------
+#   Global Variables
+# --------------------
+bin="$HOME/bin"
+code="$HOME/code"
 rit="/Volumes/RIT/"
 bogo="/Volumes/BogoJoker/public_html"
 htdocs="/Applications/MAMP/htdocs"
