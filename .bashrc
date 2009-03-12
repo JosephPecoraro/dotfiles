@@ -4,8 +4,8 @@
 alias ..='cd ..'
 alias ll='ls -lh'
 alias la='ls -la'
-alias ps='ps -ax'
 alias du='du -hc'
+alias psa='ps -Ax'
 alias cd..='cd ..'
 alias cl='clear;ls'
 alias ex='expanurl'
@@ -18,6 +18,7 @@ alias recent='ls -lAt | head'
 alias mbashrc='mate ~/.bashrc'
 alias sbashrc='source ~/.bashrc'
 alias gsed='/usr/local/bin/sed'
+alias v8='/usr/local/src/v8/shell' # V8 Javascript Shell
 alias gemedit='gemedit --editor=mate'
 alias today='date +"%A, %B %d, %Y"'
 alias yest='date -v-1d +"%A %B %d, %Y"'
@@ -117,6 +118,7 @@ alias irb19='irb19 -r irb/completion -rubygems'
 export PATH="/opt/subversion/bin:/usr/local/bin:$PATH" # Subversion 1.5.1
 export PATH="$PATH:/usr/local/sbin:/usr/local/mysql/bin"
 export PATH="$HOME/bin/:$PATH"
+export PATH="$PATH:$HOME/WebKit/WebKitTools/Scripts" # Webkit Tools
 export CLASSPATH="$CLASSPATH:/Users/joe/.classpath:/Users/joe/.classpath/js.jar"
 export CLASSPATH="$CLASSPATH:/Users/joe/workspace/Rubyish/bin" # School
 export HISTSIZE=10000
@@ -126,7 +128,6 @@ export CLICOLOR=1
 export EDITOR=vim
 export LC_CTYPE=en_US.UTF-8
 shopt -s histappend
-
 
 # ---------
 #   Prompt
