@@ -10,6 +10,7 @@ alias cd..='cd ..'
 alias cl='clear;ls'
 alias ex='expanurl'
 alias more='less'
+alias rrrm='rm -f' # "Really Really Remove" - James Heliotis
 alias ldir='ls -d */'
 alias ....='cd ../../'
 alias mkdir='mkdir -p'
@@ -19,9 +20,12 @@ alias mbashrc='mate ~/.bashrc'
 alias sbashrc='source ~/.bashrc'
 alias gsed='/usr/local/bin/sed'
 alias v8='/usr/local/src/v8/shell' # V8 Javascript Shell
-alias gemedit='gemedit --editor=mate'
 alias today='date +"%A, %B %d, %Y"'
+alias gemedit='gemedit --editor=mate'
+alias fileurl='echo -n "file://$(pwd)"'
 alias yest='date -v-1d +"%A %B %d, %Y"'
+alias now='ruby -e "puts Time.now.to_i"'
+alias junit='java junit.textui.TestRunner'
 alias htdocs='cd /Applications/MAMP/htdocs/'
 alias mampmysql='/Applications/MAMP/Library/bin/mysql -u joe -p'
 alias matedir='cd ~/Library/Application\ Support/TextMate/Bundles'
@@ -53,20 +57,35 @@ alias bogo="cd $bogo"
 #   Shortcuts
 # -------------
 alias ?='man'
-alias i="irb"
-alias m="mate"
-alias e="echo"
-alias c="clear"
+alias i='irb'
+alias m='mate'
+alias d='dict'
+alias e='echo'
+alias g='grep'
+alias r='ruby'
+alias c='clear'
+alias p='psgrep'
 alias l='ls -lhp'
-alias h="history"
-alias x="expanurl"
-alias s="easy_share"
-alias o="better_open"
+alias h='history'
+alias x='expanurl'
+alias s='easy_share'
+alias o='better_open'
+alias n='ruby -e "ARGV.each{|x|puts x}"'
 alias w="echo 'http://bogojoker.is-a-geek.com:8000/'; python -m SimpleHTTPServer"
 
 # -------------
 #   Functions
 # -------------
+
+# Rerun the last cmd and put its output into the clipboard
+copy() {
+	eval `history | line -s -2 | sed -r "s/[0-9]+//"` | pbcopy;
+}
+
+# Just take the last command and put that command into the clipboard
+copycmd() {
+	echo `history | line -s -2 | sed -r "s/[0-9]+//"` | pbcopy;
+}
 
 # Shortcut for `open` but no arguments opens the current directory
 better_open() {
@@ -76,6 +95,53 @@ better_open() {
 	fi
 }
 
+# Append to an Environmental Variable
+addto() {
+	old=`env | grep "^$1=" | sed "s/^$1=//"`
+	export $1=$old:$2
+}
+
+# Lookup in the Apple Dictionary
+# Source: http://hayne.net/MacDev/Bash/aliases.bash
+dict() {
+	open dict:///"$@";
+}
+
+# Convenience for printing awk fields
+# NOTE: when making a public script use `cut`
+fawk() {
+	CMD="{print \$$1"
+	shift
+	while [ $# -gt 0 ]; do
+		CMD=$CMD",\$$1"
+		shift
+	done
+	CMD=$CMD'}'
+	awk "$CMD"
+}
+
+# Handy Extract Program
+# Source: http://www.shell-fu.org/lister.php?id=375
+# Modifications: added jar, removed 7z and rar
+extract() {
+	if [ -f $1 ]; then
+		case $1 in
+			*.tar.bz2)   tar xvjf $1   ;;
+			*.tar.gz)    tar xvzf $1   ;;
+			*.bz2)       bunzip2 $1    ;;
+			*.gz)        gunzip $1     ;;
+			*.jar)       jar xf $1     ;;
+			*.tar)       tar xvf $1    ;;
+			*.tbz2)      tar xvjf $1   ;;
+			*.tgz)       tar xvzf $1   ;;
+			*.zip)       unzip $1      ;;
+			*.Z)         uncompress $1 ;;
+			*)           echo "'$1' cannot be extracted via >extract<" ;;
+		esac
+	else
+		echo "'$1' is not a valid file"
+	fi
+}
 
 # ----------------
 #   Autocomplete
@@ -97,6 +163,8 @@ alias gibson="ssh gibson"
 alias ga='git add'
 alias gs='git status'
 alias gd='git diff'
+alias gc='git commit'
+alias gl='git log --pretty=format:"%Cgreen%h%Creset %an %s" --stat;echo';
 
 # Now I just use the github gem!
 # alias github="open \`git config -l | grep 'remote.origin.url' | sed -En 's/remote.origin.url=git(@|:\/\/)github.com(:|\/)(.+)\/(.+).git/https:\/\/github.com\/\3\/\4/p'\`"
@@ -111,23 +179,6 @@ rmsvn(){ find . -name ".svn" -type d -exec rm -rf {} \;; } # Note: "&> /dev/null
 # --------
 alias irb='irb -r irb/completion -rubygems'
 alias irb19='irb19 -r irb/completion -rubygems'
-
-# ---------------
-#   Environment
-# ---------------
-export PATH="/opt/subversion/bin:/usr/local/bin:$PATH" # Subversion 1.5.1
-export PATH="$PATH:/usr/local/sbin:/usr/local/mysql/bin"
-export PATH="$HOME/bin/:$PATH"
-export PATH="$PATH:$HOME/WebKit/WebKitTools/Scripts" # Webkit Tools
-export CLASSPATH="$CLASSPATH:/Users/joe/.classpath:/Users/joe/.classpath/js.jar"
-export CLASSPATH="$CLASSPATH:/Users/joe/workspace/Rubyish/bin" # School
-export HISTSIZE=10000
-export HISTFILESIZE=10000
-export PAGER=less
-export CLICOLOR=1
-export EDITOR=vim
-export LC_CTYPE=en_US.UTF-8
-shopt -s histappend
 
 # ---------
 #   Prompt
@@ -150,10 +201,10 @@ historyawk(){ history|awk '{a[$2]++}END{for(i in a){printf"%5d\t%s\n",a[i],i}}'|
 
 # cd directly to a dir and list contents
 cdl() {
-  if [ "$1" ]
-  then builtin cd "$1" && ll
-  else builtin cd && ll
-  fi
+	if [ "$1" ]
+	then builtin cd "$1" && ll
+	else builtin cd && ll
+	fi
 }
 
 # mkdir and cd directly to it
@@ -167,12 +218,12 @@ mkdirc() {
 # SOURCE => http://pastie.caboo.se/188640
 #    AND => http://justinfrench.com/index.php?id=231
 nth() {
-  osascript -e "
-  Tell application \"Terminal\"
-    activate
-    tell application \"System Events\" to tell process \"Terminal\" to keystroke \"t\" using command down
-    do script with command \"cd '$(pwd)'; clear\" in selected tab of the front window
-  end tell"
+	osascript -e "
+	Tell application \"Terminal\"
+		activate
+		tell application \"System Events\" to tell process \"Terminal\" to keystroke \"t\" using command down
+		do script with command \"cd '$(pwd)'; clear\" in selected tab of the front window
+	end tell"
 }
 
 # Convert a Man Page to a PDF, really slick
