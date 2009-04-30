@@ -22,7 +22,6 @@ alias gsed='/usr/local/bin/sed'
 alias v8='/usr/local/src/v8/shell' # V8 Javascript Shell
 alias today='date +"%A, %B %d, %Y"'
 alias gemedit='gemedit --editor=mate'
-alias fileurl='echo -n "file://$(pwd)"'
 alias yest='date -v-1d +"%A %B %d, %Y"'
 alias now='ruby -e "puts Time.now.to_i"'
 alias junit='java junit.textui.TestRunner'
@@ -87,11 +86,19 @@ copycmd() {
 	echo `history | line -s -2 | sed -r "s/[0-9]+//"` | pbcopy;
 }
 
+# Git the fileurl of the current directory or the given file
+fileurl() {
+	if [ "$1" ]
+		then echo -n "file://$(pwd)/$1"
+		else echo -n "file://$(pwd)"
+	fi
+}
+
 # Shortcut for `open` but no arguments opens the current directory
 better_open() {
   if [ "$1" ]
-	then `open "$1"`
-	else `open .`
+		then `open "$1"`
+		else `open .`
 	fi
 }
 
@@ -202,8 +209,8 @@ historyawk(){ history|awk '{a[$2]++}END{for(i in a){printf"%5d\t%s\n",a[i],i}}'|
 # cd directly to a dir and list contents
 cdl() {
 	if [ "$1" ]
-	then builtin cd "$1" && ll
-	else builtin cd && ll
+		then builtin cd "$1" && ll
+		else builtin cd && ll
 	fi
 }
 
