@@ -4,3 +4,4 @@
 [ ~/.bash_complete -nt ./.bash_complete ] && echo "Copying .bash_complete" && cp ~/.bash_complete .
 [ ~/.inputrc -nt ./.inputrc ] && echo "Copying .inputrc" && cp ~/.inputrc .
 [ ~/.irbrc -nt ./.irbrc ] && echo "Copying .irbrc" && cp ~/.irbrc .
+[ ~/.gitconfig -nt ./.gitconfig ] && echo "Copying .gitconfig" && cp ~/.gitconfig .

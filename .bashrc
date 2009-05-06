@@ -171,6 +171,7 @@ alias ga='git add'
 alias gs='git status'
 alias gd='git diff'
 alias gc='git commit'
+alias gh='github browse'
 alias gl='git log --pretty=format:"%Cgreen%h%Creset %an %s" --stat;echo';
 
 # Now I just use the github gem!
