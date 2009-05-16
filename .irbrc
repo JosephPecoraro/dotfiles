@@ -86,7 +86,7 @@ class Hash
   end
 end
 
-# A real array def, not a set diff
+# A real array diff, not a set diff
 # a1 = [1,1,2]
 # a2 = [1,2]
 # a1 - a2     #=> []
@@ -129,8 +129,30 @@ module Kernel
   def c
     system('clear')
   end
+
+	# Methods that aren't in Object.methods
+	def m
+		self.methods - Object.methods
+	end
+	alias :new_methods :m
   
 end
+
+
+class Object 
+
+	# Print Documentation
+	# Source: http://github.com/ryanb/dotfiles/blob/145906d11810c691dbb1a47481d790e3ad186dcb/irbrc
+	def ri(method = nil)
+	  unless method && method =~ /^[A-Z]/ # if class isn't specified
+	    klass = self.kind_of?(Class) ? name : self.class.name
+	    method = [klass, method].compact.join('#')
+	  end
+	  puts `ri '#{method}'`
+	end
+	
+end
+
 
 # Simple regular expression helper
 # show_regexp - stolen from the pickaxe
