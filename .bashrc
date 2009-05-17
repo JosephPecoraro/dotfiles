@@ -32,6 +32,7 @@ alias desktoptopia='open /Users/joe/Library/Application\ Support/Desktoptopia/.B
 alias jsdb='~/bin/jsdb_mac_1.7.2/jsdb' # JSDB Shell
 alias ql='qlmanage -p "$@" >& /dev/null' # Quick Look alias
 alias jsr='java org.mozilla.javascript.tools.shell.Main' # Rhino Javascript Shell
+alias webserver="echo 'http://bogojoker.is-a-geek.com:8000/'; python -m SimpleHTTPServer"
 
 # -------------
 #   School
@@ -47,10 +48,9 @@ alias complex="cd /Users/joe/Desktop/School/_Complexity"
 bin="$HOME/bin"
 code="$HOME/code"
 rit="/Volumes/RIT/"
-bogo="/Volumes/BogoJoker/public_html"
 htdocs="/Applications/MAMP/htdocs"
 school="/Users/joe/Desktop/School/"
-alias bogo="cd $bogo"
+bogo="/Volumes/BogoJoker/public_html"
 
 # -------------
 #   Shortcuts
@@ -67,10 +67,10 @@ alias p='psgrep'
 alias l='ls -lhp'
 alias h='history'
 alias x='expanurl'
+alias w='which -a'
 alias s='easy_share'
 alias o='better_open'
 alias n='ruby -e "ARGV.each{|x|puts x}"'
-alias w="echo 'http://bogojoker.is-a-geek.com:8000/'; python -m SimpleHTTPServer"
 
 # -------------
 #   Functions
@@ -161,8 +161,8 @@ source ~/.bash_complete
 # See: ~/.ssh/config
 # Old: ssh host.whatever.edu -l username
 alias rit="ssh rit"
-alias bluehost="ssh bluehost"
 alias gibson="ssh gibson"
+alias bogo="ssh bogo"
 
 # -------
 #   Git
@@ -174,13 +174,10 @@ alias gc='git commit'
 alias gh='github browse'
 alias gl='git log --pretty=format:"%Cgreen%h%Creset %an %s" --stat;echo';
 
-# Now I just use the github gem!
-# alias github="open \`git config -l | grep 'remote.origin.url' | sed -En 's/remote.origin.url=git(@|:\/\/)github.com(:|\/)(.+)\/(.+).git/https:\/\/github.com\/\3\/\4/p'\`"
-
 # -------
 #   SVN
 # -------
-rmsvn(){ find . -name ".svn" -type d -exec rm -rf {} \;; } # Note: "&> /dev/null" will suppress output
+rmsvn() { rm -rf `find . -type d -name .svn`; }
 
 # --------
 #   Ruby
