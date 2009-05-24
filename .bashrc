@@ -21,6 +21,7 @@ alias sbashrc='source ~/.bashrc'
 alias gsed='/usr/local/bin/sed'
 alias v8='/usr/local/src/v8/shell' # V8 Javascript Shell
 alias today='date +"%A, %B %d, %Y"'
+alias rspec='spec --format specdoc'
 alias gemedit='gemedit --editor=mate'
 alias yest='date -v-1d +"%A %B %d, %Y"'
 alias now='ruby -e "puts Time.now.to_i"'
