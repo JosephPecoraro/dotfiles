@@ -2,6 +2,7 @@
 #   General
 # -----------
 alias ..='cd ..'
+alias get='curl'
 alias ll='ls -lh'
 alias la='ls -la'
 alias du='du -hc'
@@ -61,6 +62,7 @@ alias i='irb'
 alias m='mate'
 alias d='dict'
 alias e='echo'
+alias f='find'
 alias g='grep'
 alias r='ruby'
 alias c='clear'
