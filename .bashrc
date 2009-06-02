@@ -33,8 +33,7 @@ alias desktoptopia='open /Users/joe/Library/Application\ Support/Desktoptopia/.B
 # -------------
 #   School
 # -------------
-alias para="cd /Users/joe/Desktop/School/_Parallel"
-alias complex="cd /Users/joe/Desktop/School/_Complexity"
+alias dist="cd /Users/joe/Desktop/School/_Distributed_Design_Patterns/"
 
 
 # --------------------
@@ -43,9 +42,13 @@ alias complex="cd /Users/joe/Desktop/School/_Complexity"
 bin="$HOME/bin"
 code="$HOME/code"
 rit="/Volumes/RIT/"
+cron="$bin/crontasks/"
 htdocs="/Applications/MAMP/htdocs"
 school="/Users/joe/Desktop/School/"
 bogo="/Volumes/BogoJoker/public_html"
+b="$bogo"
+c="$code"
+h="$htdocs"
 
 
 # -------------
@@ -58,7 +61,7 @@ alias d='dict'
 alias e='echo'
 alias f='find'
 alias g='grep'
-alias r='ruby'
+alias r='rake'
 alias c='clear'
 alias p='psgrep'
 alias l='ls -lhp'
@@ -125,6 +128,7 @@ alias gemedit='gemedit --editor=mate'
 # ---------
 alias ss='script/server'
 alias sc='script/console'
+alias sg='script/generate'
 
 
 # --------------
