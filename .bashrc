@@ -165,11 +165,19 @@ copycmd() {
 	echo `history | line -s -2 | sed -r "s/[0-9]+//"` | pbcopy;
 }
 
-# Git the fileurl of the current directory or the given file
+# Get the fileurl of the current directory or the given file
 fileurl() {
 	if [ "$1" ]
-		then echo -n "file://$(pwd)/$1"
-		else echo -n "file://$(pwd)"
+		then echo "file://$(pwd)/$1"
+		else echo "file://$(pwd)"
+	fi
+}
+
+# Get the full path of the current directory or the given file
+path() {
+	if [ "$1" ]
+		then echo "$PWD/$1"
+		else pwd
 	fi
 }
 
@@ -228,7 +236,6 @@ extract() {
 		echo "'$1' is not a valid file"
 	fi
 }
-
 
 # Cool History Summerizer
 historyawk(){ history|awk '{a[$2]++}END{for(i in a){printf"%5d\t%s\n",a[i],i}}'|sort -nr|head; }
