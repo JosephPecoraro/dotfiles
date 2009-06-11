@@ -267,6 +267,20 @@ nth() {
 	end tell"
 }
 
+# Merge two directories. Copying over files.
+# Usage: merge dir1 dir2
+# This copies everything in dir1 INTO dir2, overwriting same named files
+dirmerge() {
+	if [[ $# == 2 ]]; then
+		dir1=$1
+		dir2=$2
+		echo "Merging $1 into $2"
+		cp -R -v $1/* $2
+	else
+		echo 'usage: dirmerge dir1 dir2'
+	fi
+}
+
 # Convert a Man Page to a PDF, really slick
 # SOURCE => http://dotfiles.org/~miragj/.bashrc
 pman() { man -t "$1" | open -f -a /Applications/Preview.app/; }
