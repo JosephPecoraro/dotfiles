@@ -1,0 +1,32 @@
+# Cron Tasks for Joseph Pecoraro
+# See the "Whenever" Ruby Gem
+
+# Constants
+BASH = "/bin/bash"
+RUBY = "/usr/bin/ruby"
+CRONDIR = "/Users/joe/bin/crontasks"
+
+# Location Stuff
+every 5.minutes do
+	command "#{BASH} #{CRONDIR}/update_location.cron",
+		:desc => "Update ~/.location file!"
+	command "#{BASH} #{CRONDIR}/update_adium_status.cron",
+		:start => 1, :desc => "Update Adium based on my location!"
+end
+
+# Daily Stuff
+every 1.day do
+	command "#{RUBY} #{CRONDIR}/lastfm_logger.cron",
+		:at => '3am', :desc => "Last.fm Logging at 3:00am every day"
+end
+
+
+=begin
+# No Longer Doing These
+every :midnight do
+	command "#{BASH} #{CRONDIR}/read_mission_statement.cron"
+end
+ever :minute do
+  command "#{RUBY} #{CRONDIR}/lastfm_logger.cron"
+end
+=end
