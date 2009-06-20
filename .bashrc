@@ -26,6 +26,7 @@ alias htdocs='cd /Applications/MAMP/htdocs/'
 alias ql='qlmanage -p "$@" >& /dev/null' # Quick Look alias
 alias mampmysql='/Applications/MAMP/Library/bin/mysql -u joe -p'
 alias matedir='cd ~/Library/Application\ Support/TextMate/Bundles'
+alias crongen="whenever --load-file ~/.whenever --update-crontab joe"
 alias webserver="echo 'http://bogojoker.is-a-geek.com:8000/'; python -m SimpleHTTPServer"
 alias desktoptopia='open /Users/joe/Library/Application\ Support/Desktoptopia/.Backgrounds/'
 
