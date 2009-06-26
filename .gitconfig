@@ -8,7 +8,8 @@
 	br    = branch
 	co    = checkout
 	df    = diff
-	lg    = log --summary -p --pretty=short
+	lg    = log --summary -p --pretty=short -2
+	l     = log -10
 	h     = help
 	man   = help
 	cat   = cat-file

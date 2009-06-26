@@ -102,11 +102,12 @@ alias sbashrc='source ~/.bashrc'
 #   Git
 # -------
 alias ga='git add'
-alias gs='git status'
 alias gd='git diff'
+alias gp='git push'
 alias gc='git commit'
+alias gs='git status'
 alias gh='github browse'
-alias gl='git log --pretty=format:"%Cgreen%h%Creset %an %s" --stat;echo';
+alias gl='git log --pretty=format:"%Cgreen%h%Creset %an %s" --stat -2';
 
 
 # -------
