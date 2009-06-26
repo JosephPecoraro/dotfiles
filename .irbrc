@@ -103,6 +103,7 @@ end
 module Kernel
   
   # Awesome benchmarking function
+  # Example: bench(100) do ... end
   # Source: http://ozmm.org/posts/time_in_irb.html
   def time(times=1)
     require "benchmark"
@@ -130,11 +131,38 @@ module Kernel
     system('clear')
   end
 
-	# Methods that aren't in Object.methods
-	def m
-		self.methods - Object.methods
-	end
-	alias :new_methods :m
+	# Do something forever, break will exit the loop
+  def forever
+    while true
+      yield
+    end
+  end
+  
+  # Simple regular expression helper
+  # show_regexp - stolen from the pickaxe
+  def show_regexp(a, re)
+    if a =~ re
+      "#{$`}<<#{$&}>>#{$'}"
+    else
+      "no match"
+    end
+  end
+  
+  # Why's aorta method to edit an object in YAML, awesome!
+  # Source: http://rubyforge.org/snippet/detail.php?type=snippet&id=22
+  def aorta( obj )
+    tempfile = File.join('/tmp',"yobj_#{ Time.now.to_i }")
+    File.open( tempfile, 'w' ) { |f| f << obj.to_yaml }
+    system( "#{ ENV['EDITOR'] || 'vi' } #{ tempfile }" )
+    return obj unless File.exists?( tempfile )
+    content = YAML::load( File.open( tempfile ) )
+    File.delete( tempfile )
+    content
+  end
+  
+  def aorta!(obj)
+    obj = aorta(obj)
+  end
   
 end
 
@@ -142,6 +170,7 @@ end
 class Object 
 
 	# Print Documentation
+	# Example: String.ri :sub
 	# Source: http://github.com/ryanb/dotfiles/blob/145906d11810c691dbb1a47481d790e3ad186dcb/irbrc
 	def ri(method = nil)
 	  unless method && method =~ /^[A-Z]/ # if class isn't specified
@@ -150,19 +179,16 @@ class Object
 	  end
 	  puts `ri '#{method}'`
 	end
-	
+
+	# Methods that aren't in Object.methods
+	# Example: String.m
+	def m
+		self.methods - Object.methods
+	end
+	alias :new_methods :m
+
 end
 
-
-# Simple regular expression helper
-# show_regexp - stolen from the pickaxe
-def show_regexp(a, re)
-  if a =~ re
-    "#{$`}<<#{$&}>>#{$'}"
-  else
-    "no match"
-  end
-end
 
 # Convenience method on Regexp so you can do
 # /an/.show_match("banana") # => "b<<an>>ana" 
@@ -173,24 +199,8 @@ class Regexp
 end
 
 
-# Why's aorta method to edit an object in YAML, awesome!
-# Source: http://rubyforge.org/snippet/detail.php?type=snippet&id=22
-def aorta( obj )
-  tempfile = File.join('/tmp',"yobj_#{ Time.now.to_i }")
-  File.open( tempfile, 'w' ) { |f| f << obj.to_yaml }
-  system( "#{ ENV['EDITOR'] || 'vi' } #{ tempfile }" )
-  return obj unless File.exists?( tempfile )
-  content = YAML::load( File.open( tempfile ) )
-  File.delete( tempfile )
-  content
-end
-def aorta!(obj)
-  obj = aorta(obj)
-end
-
-
 # Load all my non-test libraries in '~/.util/irb'
-util_dir = File.expand_path('~') + '/.util/irb/*'
-Dir[util_dir].each do |f|
+UTIL_DIR = File.expand_path('~') + '/.util/irb/*'
+Dir[UTIL_DIR].each do |f|
   require f unless File.basename(f) =~ /\Atest/
 end
