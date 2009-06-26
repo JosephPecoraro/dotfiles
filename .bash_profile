@@ -15,6 +15,9 @@ export CLASSPATH="$CLASSPATH:`ruby -e \"print Dir['/Users/joe/.jars/*'].join(':'
 # For Mercurial
 export PYTHONPATH="/usr/local/lib/python2.5/site-packages/"
 
+# For WebKit Scripts
+EMAIL_ADDRESS="joepeck02@gmail.com"
+
 # General
 export HISTSIZE=10000
 export HISTFILESIZE=10000
