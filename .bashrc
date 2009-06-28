@@ -23,6 +23,7 @@ alias yest='date -v-1d +"%A %B %d, %Y"'
 alias now='ruby -e "puts Time.now.to_i"'
 alias junit='java junit.textui.TestRunner'
 alias htdocs='cd /Applications/MAMP/htdocs/'
+alias prepare-ChangeLog='prepare-ChangeLog -o'
 alias ql='qlmanage -p "$@" >& /dev/null' # Quick Look alias
 alias mampmysql='/Applications/MAMP/Library/bin/mysql -u joe -p'
 alias matedir='cd ~/Library/Application\ Support/TextMate/Bundles'

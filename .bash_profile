@@ -16,7 +16,9 @@ export CLASSPATH="$CLASSPATH:`ruby -e \"print Dir['/Users/joe/.jars/*'].join(':'
 export PYTHONPATH="/usr/local/lib/python2.5/site-packages/"
 
 # For WebKit Scripts
-EMAIL_ADDRESS="joepeck02@gmail.com"
+export REAL_NAME="Joseph Pecoraro"
+export EMAIL_ADDRESS="joepeck02@gmail.com"
+export CHANGE_LOG_EDIT_APPLICATION="TextMate"
 
 # General
 export HISTSIZE=10000
