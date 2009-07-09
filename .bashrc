@@ -3,6 +3,8 @@
 # -----------
 alias ..='cd ..'
 alias get='curl'
+alias cp='cp -R'
+alias pb='pbcopy'
 alias ll='ls -lh'
 alias la='ls -la'
 alias du='du -hc'
@@ -12,6 +14,7 @@ alias cd..='cd ..'
 alias cl='clear;ls'
 alias rrrm='rm -rf'
 alias err='echo $?'
+alias clip='pbcopy'
 alias ldir='ls -d */'
 alias ....='cd ../../'
 alias mkdir='mkdir -p'
@@ -137,9 +140,11 @@ alias sg='script/generate'
 # --------------
 #   Javascript
 # --------------
-alias jsdb='~/bin/jsdb_mac_1.7.2/jsdb' # JSDB Shell
+alias js='/System/Library/Frameworks/JavaScriptCore.framework/Resources/jsc' # WebKit's Nitro
+alias v8='/Users/joe/code/v8/v8' # V8 Javascript Shell
+alias jss='/opt/local/bin/js' # Spidermonkey
 alias jsr='java org.mozilla.javascript.tools.shell.Main' # Rhino Javascript Shell
-alias v8='/usr/local/src/v8/shell' # V8 Javascript Shell
+alias jsdb='~/bin/jsdb_mac_1.7.2/jsdb' # JSDB Shell
 
 
 # ---------
