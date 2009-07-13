@@ -18,6 +18,8 @@ end
 every 1.day do
 	command "#{RUBY} #{CRONDIR}/lastfm_logger.cron",
 		:at => '3am', :desc => "Last.fm Logging at 3:00am every day"
+	command "#{RUBY} #{CRONDIR}/lastfm_process.cron",
+	  :at => '3:01am', :desc => "Last.fm Process and Upload at 3:01am every day"
 end
 
 
