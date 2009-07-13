@@ -48,12 +48,17 @@ bin="$HOME/bin"
 code="$HOME/code"
 rit="/Volumes/RIT/"
 cron="$bin/crontasks/"
+webkit="$HOME/WebKit"
+webcore="$webkit/WebCore"
+inspector="$webcore/inspector"
 htdocs="/Applications/MAMP/htdocs"
-school="/Users/joe/Desktop/School/"
+school="$HOME/Desktop/School/"
 bogo="/Volumes/BogoJoker/public_html"
 b="$bogo"
 c="$code"
 h="$htdocs"
+w="$webkit"
+wc="$webcore"
 
 
 # -------------
@@ -157,6 +162,18 @@ alias jsdb='~/bin/jsdb_mac_1.7.2/jsdb' # JSDB Shell
 parse_git_dirty(){ [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"; }
 parse_git_branch(){ git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"; }
 export PS1="\u[\w]\$(parse_git_branch)$ "
+
+
+# ----------
+#   WebKit
+# ----------
+alias br='build-js;run-safari'
+build-js() {
+  $webcore/combine-javascript-resources                                            \
+    --input-html $inspector/front-end/inspector.html                               \
+    --output-dir $webkit/WebKitBuild/Release/WebCore.framework/Resources/inspector \
+    --output-script-name inspector.js
+}
 
 
 # -------------
