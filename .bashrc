@@ -49,6 +49,7 @@ code="$HOME/code"
 rit="/Volumes/RIT/"
 cron="$bin/crontasks/"
 webkit="$HOME/WebKit"
+desktop="$HOME/Desktop"
 webcore="$webkit/WebCore"
 inspector="$webcore/inspector"
 htdocs="/Applications/MAMP/htdocs"
@@ -58,6 +59,7 @@ b="$bogo"
 c="$code"
 h="$htdocs"
 w="$webkit"
+d="$desktop"
 wc="$webcore"
 
 
@@ -117,6 +119,7 @@ alias gc='git commit'
 alias gs='git status'
 alias gh='github browse'
 alias gl='git log --pretty=format:"%Cgreen%h%Creset %an %s" --stat -2';
+gi() { n $@ >> .gitignore; }
 
 
 # -------
@@ -179,6 +182,11 @@ build-js() {
 # -------------
 #   Functions
 # -------------
+
+# Open a script on the path in textmate
+wm() {
+  `which $1 | xargs mate`
+}
 
 # Rerun the last cmd and put its output into the clipboard
 copy() {
