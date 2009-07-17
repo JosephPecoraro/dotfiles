@@ -9,7 +9,6 @@ export PATH="$PATH:/usr/local/mysql/bin"                  # Mysql 5.1.34
 export PATH="$PATH:$HOME/WebKit/WebKitTools/Scripts"      # Webkit Tools
 
 # Java's Path
-export CLASSPATH="$CLASSPATH:/Users/joe/.classpath:/Users/joe/.classpath/js.jar"       # Rhino 1.7
 export CLASSPATH="$CLASSPATH:`ruby -e \"print Dir['/Users/joe/.jars/*'].join(':')\"`"  # all jars in ~/.jars
 
 # For Mercurial

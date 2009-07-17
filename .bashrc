@@ -151,8 +151,9 @@ alias sg='script/generate'
 alias js='/System/Library/Frameworks/JavaScriptCore.framework/Resources/jsc' # WebKit's Nitro
 alias v8='/Users/joe/code/v8/v8' # V8 Javascript Shell
 alias jss='/opt/local/bin/js' # Spidermonkey
-alias jsr='java org.mozilla.javascript.tools.shell.Main' # Rhino Javascript Shell
 alias jsdb='~/bin/jsdb_mac_1.7.2/jsdb' # JSDB Shell
+alias jsr='java -jar /Users/joe/code/env-js/rhino/js.jar' # Rhino Javascript Shell (Rhino 1.7 release 2 2009 03 22)
+alias jsbom='java -jar /Users/joe/code/env-js/rhino/js.jar -f /Users/joe/code/env-js/dist/env.rhino.js -f -' # JS with BOM
 
 
 # ---------
