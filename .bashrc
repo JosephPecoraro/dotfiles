@@ -4,6 +4,7 @@
 alias ..='cd ..'
 alias get='curl'
 alias cp='cp -R'
+alias m.='mate .'
 alias pb='pbcopy'
 alias ll='ls -lh'
 alias la='ls -la'
@@ -52,6 +53,7 @@ webkit="$HOME/WebKit"
 desktop="$HOME/Desktop"
 webcore="$webkit/WebCore"
 inspector="$webcore/inspector"
+frontend="$inspector/front-end"
 htdocs="/Applications/MAMP/htdocs"
 school="$HOME/Desktop/School/"
 bogo="/Volumes/BogoJoker/public_html"
@@ -61,12 +63,14 @@ h="$htdocs"
 w="$webkit"
 d="$desktop"
 wc="$webcore"
+f="$frontend"
 
 
 # -------------
 #   Shortcuts
 # -------------
 alias ?='man'
+alias a='ack'
 alias i='irb'
 alias m='mate'
 alias d='dict'
@@ -75,6 +79,7 @@ alias f='find'
 alias g='grep'
 alias r='rake'
 alias c='clear'
+alias b='botmap'
 alias p='psgrep'
 alias l='ls -lhp'
 alias h='history'
@@ -115,10 +120,19 @@ alias sbashrc='source ~/.bashrc'
 alias ga='git add'
 alias gd='git diff'
 alias gp='git push'
+alias gb='git branch'
 alias gc='git commit'
 alias gs='git status'
+alias glg='git lg -1'
 alias gh='github browse'
-alias gl='git log --pretty=format:"%Cgreen%h%Creset %an %s" --stat -2';
+alias gch='git checkout'
+alias gsr='git svn rebase'
+alias gm='git checkout master'
+alias gdm='git diff master'
+alias gdd='git diff | mate'
+alias grm='git rebase master'
+alias gl='git log --pretty=format:"%Cgreen%h%Creset %an %s" --stat -2'
+alias glo='git log --oneline -5'
 gi() { n $@ >> .gitignore; }
 
 
@@ -161,10 +175,12 @@ alias jsbom='java -jar /Users/joe/code/env-js/rhino/js.jar -f /Users/joe/code/en
 # ---------
 # The terminal display - "user[path](gitbranch)$ "
 #   - gitbranch only shows up in a git repo
-#   - gitbranch will have a * if there is a pending change
+#   - gitbranch will have a * if there is a pending change (TURNED OFF)
 #   - gitbranch Source => http://gist.github.com/31631
-parse_git_dirty(){ [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"; }
-parse_git_branch(){ git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"; }
+# parse_git_dirty(){ [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"; }
+# parse_git_branch(){ git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"; }
+# export PS1="\u[\w]\$(parse_git_branch)$ "
+parse_git_branch(){ git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1)/"; }
 export PS1="\u[\w]\$(parse_git_branch)$ "
 
 
@@ -177,6 +193,8 @@ build-js() {
     --input-html $inspector/front-end/inspector.html                               \
     --output-dir $webkit/WebKitBuild/Release/WebCore.framework/Resources/inspector \
     --output-script-name inspector.js
+  cp $inspector/front-end/inspector.css \
+    $webkit/WebKitBuild/Release/WebCore.framework/Resources/inspector/inspector.css
 }
 
 
