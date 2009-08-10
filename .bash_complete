@@ -25,3 +25,8 @@ source ~/.complete/git_completion.sh
 # Source: http://github.com/drnic/tabtab/tree/master
 # -----
 source ~/.tabtab.bash
+
+# -----
+# WebKit
+# -----
+source ~/WebKit/WebKitTools/Scripts/webkit-tools-completion.sh

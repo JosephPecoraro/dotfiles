@@ -134,6 +134,9 @@ alias grm='git rebase master'
 alias gl='git log --pretty=format:"%Cgreen%h%Creset %an %s" --stat -2'
 alias glo='git log --oneline -5'
 gi() { n $@ >> .gitignore; }
+alias gca='git commit --amend'
+alias grc='git rebase --continue'
+alias gri='git rebase --interactive'
 
 
 # -------
@@ -195,6 +198,8 @@ build-js() {
     --output-script-name inspector.js
   cp $inspector/front-end/inspector.css \
     $webkit/WebKitBuild/Release/WebCore.framework/Resources/inspector/inspector.css
+  cp $webcore/English.lproj/localizedStrings.js \
+    $webkit/WebKitBuild/Release/WebCore.framework/Resources/English.lproj/localizedStrings.js
 }
 
 
