@@ -23,6 +23,7 @@
 	
 [core]
 	pager = cat
+	editor = mate --wait
 
 [web]
 	browser = open

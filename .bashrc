@@ -10,12 +10,15 @@ alias ll='ls -lh'
 alias la='ls -la'
 alias du='du -hc'
 alias more='less'
+alias hask='ghci'
 alias psa='ps -Ax'
 alias cd..='cd ..'
 alias cl='clear;ls'
 alias rrrm='rm -rf'
 alias err='echo $?'
 alias clip='pbcopy'
+alias sch='scheme48'
+alias scm='scheme48'
 alias ldir='ls -d */'
 alias ....='cd ../../'
 alias mkdir='mkdir -p'
@@ -36,18 +39,13 @@ alias webserver="echo 'http://bogojoker.is-a-geek.com:8000/'; python -m SimpleHT
 alias desktoptopia='open /Users/joe/Library/Application\ Support/Desktoptopia/.Backgrounds/'
 
 
-# -------------
-#   School
-# -------------
-alias dist="cd /Users/joe/Desktop/School/_Distributed_Design_Patterns/"
-
-
 # --------------------
 #   Global Variables
 # --------------------
 bin="$HOME/bin"
 code="$HOME/code"
 rit="/Volumes/RIT/"
+hask="$HOME/haskell"
 cron="$bin/crontasks/"
 webkit="$HOME/WebKit"
 desktop="$HOME/Desktop"
@@ -57,6 +55,7 @@ frontend="$inspector/front-end"
 htdocs="/Applications/MAMP/htdocs"
 school="$HOME/Desktop/School/"
 bogo="/Volumes/BogoJoker/public_html"
+jsc="$webkit/JavaScriptCore"
 b="$bogo"
 c="$code"
 h="$htdocs"
@@ -65,12 +64,16 @@ d="$desktop"
 wc="$webcore"
 f="$frontend"
 
+# -------------
+#   School
+# -------------
+alias fp="cd $school/_Functional_Programming/"
+
 
 # -------------
 #   Shortcuts
 # -------------
 alias ?='man'
-alias a='ack'
 alias i='irb'
 alias m='mate'
 alias d='dict'
@@ -79,6 +82,7 @@ alias f='find'
 alias g='grep'
 alias r='rake'
 alias c='clear'
+alias a='ack -a'
 alias b='botmap'
 alias p='psgrep'
 alias l='ls -lhp'
@@ -118,7 +122,6 @@ alias sbashrc='source ~/.bashrc'
 #   Git
 # -------
 alias ga='git add'
-alias gd='git diff'
 alias gp='git push'
 alias gb='git branch'
 alias gc='git commit'
@@ -127,9 +130,10 @@ alias glg='git lg -1'
 alias gh='github browse'
 alias gch='git checkout'
 alias gsr='git svn rebase'
+alias gd='git diff --binary'
 alias gm='git checkout master'
-alias gdm='git diff master'
-alias gdd='git diff | mate'
+alias gdm='git diff --binary master'
+alias gdd='git diff --binary | mate'
 alias grm='git rebase master'
 alias gl='git log --pretty=format:"%Cgreen%h%Creset %an %s" --stat -2'
 alias glo='git log --oneline -5'
@@ -190,7 +194,9 @@ export PS1="\u[\w]\$(parse_git_branch)$ "
 # ----------
 #   WebKit
 # ----------
+alias bw='build-webkit'
 alias br='build-js;run-safari'
+build-images() { cp $frontend/Images/* $webkit/WebKitBuild/Release/WebCore.framework/Resources/inspector/Images; }
 build-js() {
   $webcore/combine-javascript-resources                                            \
     --input-html $inspector/front-end/inspector.html                               \

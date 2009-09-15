@@ -16,7 +16,7 @@ export PYTHONPATH="/usr/local/lib/python2.5/site-packages/"
 
 # For WebKit Scripts
 export REAL_NAME="Joseph Pecoraro"
-export EMAIL_ADDRESS="joepeck02@gmail.com"
+export EMAIL_ADDRESS="joepeck@webkit.org"
 export CHANGE_LOG_EDIT_APPLICATION="TextMate"
 
 # General
@@ -26,6 +26,7 @@ export PAGER=less
 export CLICOLOR=1
 export EDITOR=vim
 export LC_CTYPE=en_US.UTF-8
+export LC_ALL=C
 shopt -s histappend
 
 # Execute .bashrc if it's there
