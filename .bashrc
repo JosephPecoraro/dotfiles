@@ -2,7 +2,6 @@
 #   General
 # -----------
 alias ..='cd ..'
-alias get='curl'
 alias cp='cp -R'
 alias m.='mate .'
 alias pb='pbcopy'
@@ -10,18 +9,20 @@ alias ll='ls -lh'
 alias la='ls -la'
 alias du='du -hc'
 alias more='less'
-alias hask='ghci'
 alias psa='ps -Ax'
 alias cd..='cd ..'
 alias cl='clear;ls'
 alias rrrm='rm -rf'
 alias err='echo $?'
 alias clip='pbcopy'
+alias get='curl -L'
 alias sch='scheme48'
 alias scm='scheme48'
+alias xo='xargs open'
 alias ldir='ls -d */'
 alias ....='cd ../../'
 alias mkdir='mkdir -p'
+alias af='find . | ack'
 alias base64='base64 --quiet'
 alias recent='ls -lAt | head'
 alias gsed='/usr/local/bin/sed'
@@ -50,19 +51,27 @@ cron="$bin/crontasks/"
 webkit="$HOME/WebKit"
 desktop="$HOME/Desktop"
 webcore="$webkit/WebCore"
+patch="$HOME/Desktop/patch"
+jsc="$webkit/JavaScriptCore"
+school="$HOME/Desktop/School/"
 inspector="$webcore/inspector"
 frontend="$inspector/front-end"
 htdocs="/Applications/MAMP/htdocs"
-school="$HOME/Desktop/School/"
 bogo="/Volumes/BogoJoker/public_html"
-jsc="$webkit/JavaScriptCore"
+
+
+# ------------------
+#   Mini Variables
+# ------------------
 b="$bogo"
 c="$code"
+p="$patch"
 h="$htdocs"
 w="$webkit"
 d="$desktop"
 wc="$webcore"
 f="$frontend"
+
 
 # -------------
 #   School
@@ -107,8 +116,8 @@ source ~/.bash_complete
 # See: ~/.ssh/config
 # Old: ssh host.whatever.edu -l username
 alias rit="ssh rit"
-alias gibson="ssh gibson"
 alias bogo="ssh bogo"
+alias gibson="ssh gibson"
 
 
 # --------
@@ -131,16 +140,17 @@ alias gh='github browse'
 alias gch='git checkout'
 alias gsr='git svn rebase'
 alias gd='git diff --binary'
-alias gm='git checkout master'
-alias gdm='git diff --binary master'
-alias gdd='git diff --binary | mate'
 alias grm='git rebase master'
-alias gl='git log --pretty=format:"%Cgreen%h%Creset %an %s" --stat -2'
-alias glo='git log --oneline -5'
-gi() { n $@ >> .gitignore; }
 alias gca='git commit --amend'
+alias gm='git checkout master'
+alias glo='git log --oneline -5'
 alias grc='git rebase --continue'
 alias gri='git rebase --interactive'
+alias gdm='git diff --binary master'
+alias gdd='git diff --binary | mate'
+alias gdp='git diff --binary HEAD^ | mate'
+alias gl='git log --pretty=format:"%Cgreen%h%Creset %an %s" --stat -2'
+gi() { n $@ >> .gitignore; }
 
 
 # -------
@@ -152,10 +162,10 @@ rmsvn() { rm -rf `find . -type d -name .svn`; }
 # --------
 #   Ruby
 # --------
-alias irb='irb -r irb/completion -rubygems'
-alias irb19='irb19 -r irb/completion -rubygems'
 alias rspec='spec --format specdoc'
 alias gemedit='gemedit --editor=mate'
+alias irb='irb -r irb/completion -rubygems'
+alias irb19='irb19 -r irb/completion -rubygems'
 
 
 # ---------
@@ -169,12 +179,13 @@ alias sg='script/generate'
 # --------------
 #   Javascript
 # --------------
-alias js='/System/Library/Frameworks/JavaScriptCore.framework/Resources/jsc' # WebKit's Nitro
-alias v8='/Users/joe/code/v8/v8' # V8 Javascript Shell
 alias jss='/opt/local/bin/js' # Spidermonkey
-alias jsdb='~/bin/jsdb_mac_1.7.2/jsdb' # JSDB Shell
+alias v8='/Users/joe/code/v8/v8' # V8 Javascript Shell
 alias jsr='java -jar /Users/joe/code/env-js/rhino/js.jar' # Rhino Javascript Shell (Rhino 1.7 release 2 2009 03 22)
 alias jsbom='java -jar /Users/joe/code/env-js/rhino/js.jar -f /Users/joe/code/env-js/dist/env.rhino.js -f -' # JS with BOM
+alias js='/System/Library/Frameworks/JavaScriptCore.framework/Resources/jsc' # WebKit's JavaScriptCore, aka Nitro or SquirrelFish Extreme
+alias narwhal='NARWHAL_ENGINE="jsc" NARWHAL_ENGINE_HOME="platforms/jsc" /Users/joe/code/narwhal/bin/narwhal'
+alias narwhalr='/Users/joe/code/narwhal/bin/narwhal'
 
 
 # ---------
@@ -194,16 +205,23 @@ export PS1="\u[\w]\$(parse_git_branch)$ "
 # ----------
 #   WebKit
 # ----------
+INSPECTOR_COMBINE="NO"
 alias bw='build-webkit'
-alias br='build-js;run-safari'
+alias pc='prepare-ChangeLog'
+alias rc='resolve-ChangeLogs'
+alias br='build-inspector;run-safari'
 build-images() { cp $frontend/Images/* $webkit/WebKitBuild/Release/WebCore.framework/Resources/inspector/Images; }
-build-js() {
-  $webcore/combine-javascript-resources                                            \
-    --input-html $inspector/front-end/inspector.html                               \
-    --output-dir $webkit/WebKitBuild/Release/WebCore.framework/Resources/inspector \
-    --output-script-name inspector.js
-  cp $inspector/front-end/inspector.css \
-    $webkit/WebKitBuild/Release/WebCore.framework/Resources/inspector/inspector.css
+build-inspector() {
+  inspectorbuilddir="$webkit/WebKitBuild/Release/WebCore.framework/Resources/inspector"
+  if [ $INSPECTOR_COMBINE == "YES" ]; then
+    $webcore/combine-javascript-resources              \
+      --input-html $inspector/front-end/inspector.html \
+      --output-dir $inspectorbuilddir                  \
+      --output-script-name inspector.js
+  else
+    cp $inspector/front-end/*.{html,js} $inspectorbuilddir
+  fi
+  cp $inspector/front-end/*.css $inspectorbuilddir
   cp $webcore/English.lproj/localizedStrings.js \
     $webkit/WebKitBuild/Release/WebCore.framework/Resources/English.lproj/localizedStrings.js
 }

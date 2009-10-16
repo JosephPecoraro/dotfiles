@@ -7,6 +7,7 @@ export PATH="/opt/subversion/bin:$PATH"                   # Subversion 1.5.1
 export PATH="$HOME/bin:$HOME/bin/crontasks:$PATH"         # ~/bin and cron scripts
 export PATH="$PATH:/usr/local/mysql/bin"                  # Mysql 5.1.34
 export PATH="$PATH:$HOME/WebKit/WebKitTools/Scripts"      # Webkit Tools
+export PATH="$PATH:$HOME/code/narwhal/bin"                # Narwhal Common JS
 
 # Java's Path
 export CLASSPATH="$CLASSPATH:`ruby -e \"print Dir['/Users/joe/.jars/*'].join(':')\"`"  # all jars in ~/.jars
@@ -24,7 +25,7 @@ export HISTSIZE=10000
 export HISTFILESIZE=10000
 export PAGER=less
 export CLICOLOR=1
-export EDITOR=vim
+export EDITOR="mate --wait"
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=C
 shopt -s histappend
