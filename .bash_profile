@@ -20,6 +20,12 @@ export REAL_NAME="Joseph Pecoraro"
 export EMAIL_ADDRESS="joepeck@webkit.org"
 export CHANGE_LOG_EDIT_APPLICATION="TextMate"
 
+# For Go
+export GOROOT="$HOME/go"
+export GOOS="darwin"
+export GOARCH="amd64"
+export GOBIN="$HOME/bin"
+
 # General
 export HISTSIZE=10000
 export HISTFILESIZE=10000
