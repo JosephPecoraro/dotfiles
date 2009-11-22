@@ -4,7 +4,6 @@
 alias ..='cd ..'
 alias cp='cp -R'
 alias m.='mate .'
-alias pb='pbcopy'
 alias ll='ls -lh'
 alias la='ls -la'
 alias du='du -hc'
@@ -14,7 +13,6 @@ alias cd..='cd ..'
 alias cl='clear;ls'
 alias rrrm='rm -rf'
 alias err='echo $?'
-alias clip='pbcopy'
 alias get='curl -L'
 alias sch='scheme48'
 alias scm='scheme48'
@@ -153,6 +151,8 @@ alias gdd='git diff --binary | mate'
 alias gdp='git diff --binary HEAD^ | mate'
 alias gl='git log --pretty=format:"%Cgreen%h%Creset %an %s" --stat -2'
 gi() { n $@ >> .gitignore; }
+gddp() { if [ "$1" ]; then f=$1; else f=$p; fi; git diff --binary > $f; }
+gdpp() { if [ "$1" ]; then f=$1; else f=$p; fi; git diff --binary HEAD^ > $f; }
 
 
 # -------
@@ -212,6 +212,7 @@ alias bw='build-webkit'
 alias pc='prepare-ChangeLog'
 alias rc='resolve-ChangeLogs'
 alias br='build-inspector;run-safari'
+alias bt='build-inspector;run-webkit-tests inspector'
 build-images() { cp $frontend/Images/* $webkit/WebKitBuild/Release/WebCore.framework/Resources/inspector/Images; }
 build-inspector() {
   inspectorbuilddir="$webkit/WebKitBuild/Release/WebCore.framework/Resources/inspector"
@@ -240,12 +241,17 @@ wm() {
 
 # Rerun the last cmd and put its output into the clipboard
 copy() {
-	eval `history | line -s -2 | sed -r "s/[0-9]+//"` | pbcopy;
+	eval `history | line -s -2 | sed -r "s/[0-9]+//"` | pb;
 }
 
 # Just take the last command and put that command into the clipboard
 copycmd() {
-	echo `history | line -s -2 | sed -r "s/[0-9]+//"` | pbcopy;
+	echo `history | line -s -2 | sed -E "s/[0-9]+[ \t]+//"` | pb;
+}
+
+# Better Copy to Clipboard
+pb() {
+  ruby -e "print STDIN.readlines.to_s.strip()" | pbcopy;
 }
 
 # Get the fileurl of the current directory or the given file
