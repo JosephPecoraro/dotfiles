@@ -21,9 +21,11 @@ alias ldir='ls -d */'
 alias ....='cd ../../'
 alias mkdir='mkdir -p'
 alias af='find . | ack'
+alias beep="echo $'\a'"
 alias base64='base64 --quiet'
 alias recent='ls -lAt | head'
 alias gsed='/usr/local/bin/sed'
+alias bashhelp='cat ~/.bashhelp'
 alias today='date +"%A, %B %d, %Y"'
 alias yest='date -v-1d +"%A %B %d, %Y"'
 alias now='ruby -e "puts Time.now.to_i"'
@@ -140,6 +142,7 @@ alias gh='github browse'
 alias gch='git checkout'
 alias gsr='git svn rebase'
 alias gd='git diff --binary'
+alias gap="git apply $patch"
 alias grm='git rebase master'
 alias gca='git commit --amend'
 alias gm='git checkout master'
@@ -227,6 +230,16 @@ build-inspector() {
   cp $inspector/front-end/*.css $inspectorbuilddir
   cp $webcore/English.lproj/localizedStrings.js \
     $webkit/WebKitBuild/Release/WebCore.framework/Resources/English.lproj/localizedStrings.js
+}
+
+trac() {
+  path=`echo $(path $1) | ruby -pe 'sub(/^.*WebKit\//,"")'`
+  url="http://trac.webkit.org/browser/trunk/$path"
+  if [ "$2" ]; then
+    o "$url#L$2"
+  else
+    o $url
+  fi
 }
 
 
