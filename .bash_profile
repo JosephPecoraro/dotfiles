@@ -35,6 +35,7 @@ export EDITOR="mate --wait"
 export LC_CTYPE=en_US.UTF-8
 export LC_ALL=C
 shopt -s histappend
+shopt -s extglob
 
 # Execute .bashrc if it's there
 if [ -f ~/.bashrc ]; then

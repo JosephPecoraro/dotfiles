@@ -1,6 +1,7 @@
 # -----------
 #   General
 # -----------
+alias ra='rake'
 alias ..='cd ..'
 alias cp='cp -R'
 alias m.='mate .'
@@ -8,14 +9,17 @@ alias ll='ls -lh'
 alias la='ls -la'
 alias du='du -hc'
 alias more='less'
+alias 64='base64'
 alias psa='ps -Ax'
 alias cd..='cd ..'
 alias cl='clear;ls'
 alias rrrm='rm -rf'
 alias err='echo $?'
 alias get='curl -L'
+alias pine='alpine'
 alias sch='scheme48'
 alias scm='scheme48'
+alias chx='chmod +x'
 alias xo='xargs open'
 alias ldir='ls -d */'
 alias ....='cd ../../'
@@ -32,6 +36,7 @@ alias now='ruby -e "puts Time.now.to_i"'
 alias junit='java junit.textui.TestRunner'
 alias htdocs='cd /Applications/MAMP/htdocs/'
 alias prepare-ChangeLog='prepare-ChangeLog -o'
+alias po='pomo' # http://github.com/visionmedia/pomo
 alias ql='qlmanage -p "$@" >& /dev/null' # Quick Look alias
 alias mampmysql='/Applications/MAMP/Library/bin/mysql -u joe -p'
 alias matedir='cd ~/Library/Application\ Support/TextMate/Bundles'
@@ -91,7 +96,7 @@ alias d='dict'
 alias e='echo'
 alias f='find'
 alias g='grep'
-alias r='rake'
+alias r='ruby'
 alias c='clear'
 alias a='ack -a'
 alias b='botmap'
@@ -104,7 +109,6 @@ alias w='which -a'
 alias s='easy_share'
 alias o='better_open'
 alias n='ruby -e "ARGV.each{|x|puts x}"'
-
 
 # ----------------
 #   Autocomplete
@@ -138,8 +142,8 @@ alias gb='git branch'
 alias gc='git commit'
 alias gs='git status'
 alias glg='git lg -1'
-alias gh='github browse'
 alias gch='git checkout'
+alias gba='git branch -a'
 alias gsr='git svn rebase'
 alias gd='git diff --binary'
 alias gap="git apply $patch"
@@ -148,12 +152,15 @@ alias gca='git commit --amend'
 alias gm='git checkout master'
 alias glo='git log --oneline -5'
 alias grc='git rebase --continue'
+alias gai='git add --interactive'
 alias gri='git rebase --interactive'
 alias gdm='git diff --binary master'
 alias gdd='git diff --binary | mate'
 alias gdp='git diff --binary HEAD^ | mate'
+alias gdc='git diff --binary --cached | mate'
 alias gl='git log --pretty=format:"%Cgreen%h%Creset %an %s" --stat -2'
 gi() { n $@ >> .gitignore; }
+gh() { if [ "$1" ]; then github $*; else github browse; fi; }
 gddp() { if [ "$1" ]; then f=$1; else f=$p; fi; git diff --binary > $f; }
 gdpp() { if [ "$1" ]; then f=$1; else f=$p; fi; git diff --binary HEAD^ > $f; }
 
@@ -184,7 +191,8 @@ alias sg='script/generate'
 # --------------
 #   Javascript
 # --------------
-alias jss='/opt/local/bin/js' # Spidermonkey
+alias jss='/Users/joe/code/mozilla-central/js/src/js' # Spidermonkey
+alias jsso='/opt/local/bin/js' # Spidermonkey old
 alias v8='/Users/joe/code/v8/v8' # V8 Javascript Shell
 alias jsr='java -jar /Users/joe/code/env-js/rhino/js.jar' # Rhino Javascript Shell (Rhino 1.7 release 2 2009 03 22)
 alias jsbom='java -jar /Users/joe/code/env-js/rhino/js.jar -f /Users/joe/code/env-js/dist/env.rhino.js -f -' # JS with BOM
@@ -297,9 +305,15 @@ addto() {
 	export $1=$old:$2
 }
 
+# Output a dictionary lookup immediately
+# Source: http://github.com/isaacs/dotfiles/blob/master/.extra.bashrc
+dict () {
+	curl -s dict://dict.org/d:$1 | perl -ne 's/\r//; last if /^\.$/; print if /^151/../^250/'
+}
+
 # Lookup in the Apple Dictionary
 # Source: http://hayne.net/MacDev/Bash/aliases.bash
-dict() {
+odict() {
 	open dict:///"$@";
 }
 
@@ -389,6 +403,41 @@ pman() { man -t "$1" | open -f -a /Applications/Preview.app/; }
 
 # Run .profile (MacPorts)
 source ~/.profile
+
+# Count lines of code in a [1:dir] or the current
+# working directory.
+# SOURCE: http://github.com/visionmedia/dotfiles/blob/master/.bash_profile
+ 
+function lc { 
+  dir=${1:-.} 
+  awk='' 
+ 
+  # Extensions
+  exts=( c h rb rake module inc php install js css haml sass erb )
+  exts_pattern=`echo ${exts[*]} | tr " " "|"` 
+ 
+  # AWK iteration
+  for (( i = 0; i < ${#exts[*]}; i++ )); do
+  awk=${awk}' /\.('${exts[$i]}')$/ { '${exts[$i]}'_total += $1 }'
+  done
+ 
+  # AWK print each total
+  awk=${awk}' END {'
+  for (( i = 0; i < ${#exts[*]}; i++ )); do
+  awk=${awk}' printf "'${exts[$i]}' %d \\n", '${exts[$i]}'_total;'
+  done
+ 
+  # AWK print aggregated total
+  awk=${awk}' total = '
+  for (( i = 0; i < ${#exts[*]}; i++ )); do
+  awk=${awk}${exts[$i]}'_total + '
+  done
+  
+  # AWK close 
+  awk=${awk}'0; printf "total %d \\n", total; }'
+ 
+  echo -ne $(find "$dir" -type f | egrep '\.('"$exts_pattern"')$' | xargs wc -l | awk "$awk")
+}
 
 # PDF Merge Command, to be created later
 # /usr/local/bin/gs -q -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=talking_points.pdf dbsi-notes-1.pdf dbsi-notes-2.pdf dbsi-notes-3.pdf dbsi-notes-4.pdf

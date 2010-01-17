@@ -1,37 +1,39 @@
 [user]
-	name = Joseph Pecoraro
-	email = joepeck02@gmail.com
-	
+    name = Joseph Pecoraro
+    email = joepeck02@gmail.com
+
 [alias]
-	st    = status
-	ci    = commit
-	br    = branch
-	co    = checkout
-	df    = diff
-	lg    = log --summary -p --pretty=short -2
-	l     = log -10
-	h     = help
-	man   = help
-	cat   = cat-file
-	type  = cat-file -t
-	cfg   = config --global
-	patch = add --patch
-	hash  = hash-object
+    st    = status
+    ci    = commit
+    br    = branch
+    co    = checkout
+    df    = diff
+    lg    = log --summary -p --pretty=short -2
+    l     = log -10
+    h     = help
+    man     = help
+    cat     = cat-file
+    type    = cat-file -t
+    cfg     = config --global
+    patch = add --patch
+    hash    = hash-object
+    unstage = reset HEAD
+    moveheadto = reset --hard
 
 [format]
-	pretty = oneline
-	
+    pretty = oneline
+
 [core]
-	pager = cat
-	editor = mate --wait
+    pager = cat
+    editor = mate --wait
 
 [web]
-	browser = open
+    browser = open
 
 [instaweb]
-	local = false
-	port = 8050
+    local = false
+    port = 8050
 
 [github]
-	user = JosephPecoraro
-	token = --hidden--
+    user = JosephPecoraro
+    token = --hidden--
