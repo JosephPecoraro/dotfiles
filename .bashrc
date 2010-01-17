@@ -262,12 +262,12 @@ wm() {
 
 # Rerun the last cmd and put its output into the clipboard
 copy() {
-	eval `history | line -s -2 | sed -r "s/[0-9]+//"` | pb;
+  eval `history | line -s -2 | sed -r "s/[0-9]+//"` | pb;
 }
 
 # Just take the last command and put that command into the clipboard
 copycmd() {
-	echo `history | line -s -2 | sed -E "s/[0-9]+[ \t]+//"` | pb;
+  echo `history | line -s -2 | sed -E "s/[0-9]+[ \t]+//"` | pb;
 }
 
 # Better Copy to Clipboard
@@ -277,80 +277,80 @@ pb() {
 
 # Get the fileurl of the current directory or the given file
 fileurl() {
-	if [ "$1" ]
-		then echo "file://$(pwd)/$1"
-		else echo "file://$(pwd)"
-	fi
+  if [ "$1" ]
+    then echo "file://$(pwd)/$1"
+    else echo "file://$(pwd)"
+  fi
 }
 
 # Get the full path of the current directory or the given file
 path() {
-	if [ "$1" ]
-		then echo "$PWD/$1"
-		else pwd
-	fi
+  if [ "$1" ]
+    then echo "$PWD/$1"
+    else pwd
+  fi
 }
 
 # Shortcut for `open` but no arguments opens the current directory
 better_open() {
   if [ "$1" ]
-		then `open "$1"`
-		else `open .`
-	fi
+    then `open "$1"`
+    else `open .`
+  fi
 }
 
 # Append to an Environmental Variable
 addto() {
-	old=`env | grep "^$1=" | sed "s/^$1=//"`
-	export $1=$old:$2
+  old=`env | grep "^$1=" | sed "s/^$1=//"`
+  export $1=$old:$2
 }
 
 # Output a dictionary lookup immediately
 # Source: http://github.com/isaacs/dotfiles/blob/master/.extra.bashrc
 dict () {
-	curl -s dict://dict.org/d:$1 | perl -ne 's/\r//; last if /^\.$/; print if /^151/../^250/'
+  curl -s dict://dict.org/d:$1 | perl -ne 's/\r//; last if /^\.$/; print if /^151/../^250/'
 }
 
 # Lookup in the Apple Dictionary
 # Source: http://hayne.net/MacDev/Bash/aliases.bash
 odict() {
-	open dict:///"$@";
+  open dict:///"$@";
 }
 
 # Convenience for printing awk fields
 # NOTE: when making a public script use `cut`
 fawk() {
-	CMD="{print \$$1"
-	shift
-	while [ $# -gt 0 ]; do
-		CMD=$CMD",\$$1"
-		shift
-	done
-	CMD=$CMD'}'
-	awk "$CMD"
+  CMD="{print \$$1"
+  shift
+  while [ $# -gt 0 ]; do
+    CMD=$CMD",\$$1"
+    shift
+  done
+  CMD=$CMD'}'
+  awk "$CMD"
 }
 
 # Handy Extract Program
 # Source: http://www.shell-fu.org/lister.php?id=375
 # Modifications: added jar, removed 7z and rar
 extract() {
-	if [ -f $1 ]; then
-		case $1 in
-			*.tar.bz2)   tar xvjf $1   ;;
-			*.tar.gz)    tar xvzf $1   ;;
-			*.bz2)       bunzip2 $1    ;;
-			*.gz)        gunzip $1     ;;
-			*.jar)       jar xf $1     ;;
-			*.tar)       tar xvf $1    ;;
-			*.tbz2)      tar xvjf $1   ;;
-			*.tgz)       tar xvzf $1   ;;
-			*.zip)       unzip $1      ;;
-			*.Z)         uncompress $1 ;;
-			*)           echo "'$1' cannot be extracted via >extract<" ;;
-		esac
-	else
-		echo "'$1' is not a valid file"
-	fi
+  if [ -f $1 ]; then
+    case $1 in
+      *.tar.bz2)   tar xvjf $1   ;;
+      *.tar.gz)    tar xvzf $1   ;;
+      *.bz2)       bunzip2 $1    ;;
+      *.gz)        gunzip $1     ;;
+      *.jar)       jar xf $1     ;;
+      *.tar)       tar xvf $1    ;;
+      *.tbz2)      tar xvjf $1   ;;
+      *.tgz)       tar xvzf $1   ;;
+      *.zip)       unzip $1      ;;
+      *.Z)         uncompress $1 ;;
+      *)           echo "'$1' cannot be extracted via >extract<" ;;
+    esac
+  else
+    echo "'$1' is not a valid file"
+  fi
 }
 
 # Cool History Summerizer
@@ -358,43 +358,43 @@ historyawk(){ history|awk '{a[$2]++}END{for(i in a){printf"%5d\t%s\n",a[i],i}}'|
 
 # cd directly to a dir and list contents
 cdl() {
-	if [ "$1" ]
-		then builtin cd "$1" && ll
-		else builtin cd && ll
-	fi
+  if [ "$1" ]
+    then builtin cd "$1" && ll
+    else builtin cd && ll
+  fi
 }
 
 # mkdir and cd directly to it
 mkdirc() {
-	if [ "$1" ]
-		then mkdir -p "$1" && cd "$1"
-	fi
+  if [ "$1" ]
+    then mkdir -p "$1" && cd "$1"
+  fi
 }
 
 # Open a new terminal tab in the same directory as the current
 # SOURCE => http://pastie.caboo.se/188640
 #    AND => http://justinfrench.com/index.php?id=231
 nth() {
-	osascript -e "
-	Tell application \"Terminal\"
-		activate
-		tell application \"System Events\" to tell process \"Terminal\" to keystroke \"t\" using command down
-		do script with command \"cd '$(pwd)'; clear\" in selected tab of the front window
-	end tell"
+  osascript -e "
+  Tell application \"Terminal\"
+    activate
+    tell application \"System Events\" to tell process \"Terminal\" to keystroke \"t\" using command down
+    do script with command \"cd '$(pwd)'; clear\" in selected tab of the front window
+  end tell"
 }
 
 # Merge two directories. Copying over files.
 # Usage: merge dir1 dir2
 # This copies everything in dir1 INTO dir2, overwriting same named files
 dirmerge() {
-	if [[ $# == 2 ]]; then
-		dir1=$1
-		dir2=$2
-		echo "Merging $1 into $2"
-		cp -R -v $1/* $2
-	else
-		echo 'usage: dirmerge dir1 dir2'
-	fi
+  if [[ $# == 2 ]]; then
+    dir1=$1
+    dir2=$2
+    echo "Merging $1 into $2"
+    cp -R -v $1/* $2
+  else
+    echo 'usage: dirmerge dir1 dir2'
+  fi
 }
 
 # Convert a Man Page to a PDF, really slick
@@ -407,35 +407,35 @@ source ~/.profile
 # Count lines of code in a [1:dir] or the current
 # working directory.
 # SOURCE: http://github.com/visionmedia/dotfiles/blob/master/.bash_profile
- 
-function lc { 
-  dir=${1:-.} 
-  awk='' 
- 
+
+function lc {
+  dir=${1:-.}
+  awk=''
+
   # Extensions
   exts=( c h rb rake module inc php install js css haml sass erb )
-  exts_pattern=`echo ${exts[*]} | tr " " "|"` 
- 
+  exts_pattern=`echo ${exts[*]} | tr " " "|"`
+
   # AWK iteration
   for (( i = 0; i < ${#exts[*]}; i++ )); do
   awk=${awk}' /\.('${exts[$i]}')$/ { '${exts[$i]}'_total += $1 }'
   done
- 
+
   # AWK print each total
   awk=${awk}' END {'
   for (( i = 0; i < ${#exts[*]}; i++ )); do
   awk=${awk}' printf "'${exts[$i]}' %d \\n", '${exts[$i]}'_total;'
   done
- 
+
   # AWK print aggregated total
   awk=${awk}' total = '
   for (( i = 0; i < ${#exts[*]}; i++ )); do
   awk=${awk}${exts[$i]}'_total + '
   done
-  
-  # AWK close 
+
+  # AWK close
   awk=${awk}'0; printf "total %d \\n", total; }'
- 
+
   echo -ne $(find "$dir" -type f | egrep '\.('"$exts_pattern"')$' | xargs wc -l | awk "$awk")
 }
 
