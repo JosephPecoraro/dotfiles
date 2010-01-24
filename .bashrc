@@ -191,10 +191,11 @@ alias sg='script/generate'
 # --------------
 #   Javascript
 # --------------
+alias noder='rlwrap node-repl' # Node.js
 alias jss='/Users/joe/code/mozilla-central/js/src/js' # Spidermonkey
 alias jsso='/opt/local/bin/js' # Spidermonkey old
-alias v8='/Users/joe/code/v8/v8' # V8 Javascript Shell
-alias jsr='java -jar /Users/joe/code/env-js/rhino/js.jar' # Rhino Javascript Shell (Rhino 1.7 release 2 2009 03 22)
+alias v8='rlwrap /Users/joe/code/v8/v8' # V8 Javascript Shell
+alias jsr='rlwrap java -jar /Users/joe/code/env-js/rhino/js.jar' # Rhino Javascript Shell (Rhino 1.7 release 2 2009 03 22)
 alias jsbom='java -jar /Users/joe/code/env-js/rhino/js.jar -f /Users/joe/code/env-js/dist/env.rhino.js -f -' # JS with BOM
 alias js='/System/Library/Frameworks/JavaScriptCore.framework/Resources/jsc' # WebKit's JavaScriptCore, aka Nitro or SquirrelFish Extreme
 alias narwhal='NARWHAL_ENGINE="jsc" NARWHAL_ENGINE_HOME="platforms/jsc" /Users/joe/code/narwhal/bin/narwhal'
